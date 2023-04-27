@@ -1,0 +1,19 @@
+{
+    "name": "me/advanced",
+    "description": "console chat",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexey Barinov",
+            "email": "barinulka@yandex.ru"
+        }
+    ],
+    "require": {
+        "fakerphp/faker": "^1.21"
+    }
+}
