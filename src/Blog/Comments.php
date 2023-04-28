@@ -1,26 +1,27 @@
 <?php
 namespace App\Blog;
 
+use App\Blog\Post;
 use App\Person\Person;
 
-class Post
+class Comments
 {
     private int $id;
     private Person $author;
-    private int $author_id;
-    private string $title;
+    private Post $post;
     private string $text;
 
-    public function __construct(int $id, Person $author, string $title, string $text)
+    public function __construct(int $id, Person $author, Post $post, string $text)
     {
         $this->id = $id;
         $this->author = $author;
-        $this->title = $title;
+        $this->post = $post;
         $this->text = $text;
     }
 
     public function __toString()
     {
-        return $this->author . ' пишет: ' . $this->text . PHP_EOL;
+        return $this->text . PHP_EOL;
     }
+
 }
