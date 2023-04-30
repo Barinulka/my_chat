@@ -1,7 +1,7 @@
 <?php
 namespace App\Blog;
 
-class Comments
+class Comment
 {
     public function __construct(
         private int $id, 

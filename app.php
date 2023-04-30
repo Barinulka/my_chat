@@ -2,14 +2,13 @@
 use App\Blog\Post;
 use App\Blog\User;
 use App\Person\Name;
-use App\Blog\Comments;
-use App\Person\Person;
+use App\Blog\Comment;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $faker = Faker\Factory::create('ru_RU');
 
-$name = new Name($faker->firstName(), $faker->lastName());
+$name = new Name($faker->firstName('female'), $faker->lastName('female'));
 $user = new User(
     $faker->randomNumber(5, false),
     $name,
@@ -37,7 +36,7 @@ if (isset($argv[1])) {
                 $faker->sentence(3),
                 $faker->paragraph(3),
             );
-            $comment = new Comments(
+            $comment = new Comment(
                 $faker->randomNumber(5, false),
                 $user,
                 $post,
