@@ -3,7 +3,6 @@ use App\Blog\Post;
 use App\Blog\User;
 use App\Person\Name;
 use App\Blog\Comment;
-use App\Person\Person;
 use App\Blog\Exceptions\UserNotFoundException;
 use App\Blog\Repositories\UserRepository\InMemoryUsersRepository;
 
