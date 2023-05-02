@@ -1,4 +1,6 @@
 <?php
+use App\Blog\Commands\Arguments;
+use App\Blog\Commands\CreateUserCommand;
 use App\Blog\Post;
 use App\Blog\User;
 use App\Blog\UUID;
@@ -16,10 +18,12 @@ require __DIR__ . '/DB/db_connect.php';
 // $connection = new PDO("mysql:host=localhost;dbname=blog_mysql",'root','root');
 
 $usersRepository = new MysqlUsersRepository($connection);
-// $usersRepository->save(new User(UUID::random(), new Name('Alexey', 'Barinov'), 'admin'));
+// $usersRepository->save(new User(UUID::random(), new Name('Super', 'Admin'), 'admin'));
+$command = new CreateUserCommand($usersRepository);
 
 try {
-    echo $usersRepository->get(new UUID('483343ed-e097-4191-b0bc-9c4bfa3c5564'));
+    // echo $usersRepository->getByLogin('admin');
+    $command->handle(Arguments::fromArgv($argv));
 } catch (Exception $ex) {
     echo $ex->getMessage() . PHP_EOL;
 }

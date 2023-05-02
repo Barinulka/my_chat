@@ -4,7 +4,7 @@ namespace App\Blog;
 class Comment
 {
     public function __construct(
-        private int $id, 
+        private UUID $uuid, 
         private User $user, 
         private Post $post, 
         private string $text
@@ -20,23 +20,15 @@ class Comment
     /**
      * @return integer
      */
-    public function id (): int
+    public function uuid (): UUID
     {
-        return $this->id;
-    }
-
-    /**
-     * @param integer $id
-     */
-    public function setId(int $id): void 
-    {
-        $this->id = $id;
+        return $this->uuid;
     }
 
     /**
      * @param User $user
      */
-    public function getUser(): User
+    public function user(): User
     {
         return $this->user;
     }
@@ -52,7 +44,7 @@ class Comment
     /**
      * @return Post
      */
-    public function getPost(): Post
+    public function post(): Post
     {
         return $this->post;
     }
@@ -68,7 +60,7 @@ class Comment
     /**
      * @return string
      */
-    public function getText(): string 
+    public function text(): string 
     {
         return $this->text;
     }

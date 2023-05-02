@@ -3,14 +3,14 @@ namespace App\Blog;
 
 class Post
 {
-    private int $id;
+    private UUID $uuid;
     private User $user;
     private string $title;
     private string $text;
 
-    public function __construct(int $id, User $user, string $title, string $text)
+    public function __construct(UUID $uuid, User $user, string $title, string $text)
     {
-        $this->id = $id;
+        $this->uuid = $uuid;
         $this->user = $user;
         $this->title = $title;
         $this->text = $text;
@@ -24,15 +24,8 @@ class Post
     /**
      * @return int
      */
-    public function getId(): int {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void {
-        $this->id = $id;
+    public function uuid(): UUID {
+        return $this->uuid;
     }
 
     /**
@@ -52,7 +45,7 @@ class Post
     /**
      * @return string
      */
-    public function getTitle(): string {
+    public function title(): string {
         return $this->title;
     }
 
@@ -66,7 +59,7 @@ class Post
     /**
      * @return string
      */
-    public function getText(): string {
+    public function text(): string {
         return $this->text;
     }
 
