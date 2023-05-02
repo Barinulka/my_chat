@@ -1,5 +1,5 @@
 <?php
-namespace App\Blog\Repositories\UserRepository;
+namespace App\Blog\Repositories\UsersRepository;
 
 use App\Blog\User;
 use App\Blog\Exceptions\UserNotFoundException;

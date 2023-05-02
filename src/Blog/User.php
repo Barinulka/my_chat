@@ -5,48 +5,39 @@ use App\Person\Name;
 
 class User 
 {
-    private int $id;
+    private UUID $uuid;
     private Name $username;
     private string $login;
 
     /**
-     * @param integer $id
+     * @param UUID $uuid
      * @param Name $username
      * @param string $login
      */
-    public function __construct(int $id, Name $username, string $login)
+    public function __construct(UUID $uuid, Name $username, string $login)
     {
-        $this->id = $id;
+        $this->uuid = $uuid;
         $this->username = $username;
         $this->login = $login;
     }
 
     public function __toString()
     {
-        return "Пользователь $this->id с именем $this->username и логином $this->login" . PHP_EOL;
+        return "Пользователь $this->uuid с именем $this->username и логином $this->login" . PHP_EOL;
     }
 
     /**
      * @return integer
      */
-    public function id(): int
+    public function uuid(): UUID
     {
-        return $this->id;
+        return $this->uuid;
     }
 
     /**
-     * @param integer $id
-     * @return void
+     * @return Name
      */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
+    public function name(): Name
     {
         return $this->username;
     }
