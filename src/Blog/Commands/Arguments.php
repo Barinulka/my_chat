@@ -8,6 +8,7 @@ final class Arguments
     private array $arguments = [];
 
     public function __construct(iterable $arguments){
+        
         foreach ($arguments as $key => $value) {
             $stringValue = trim((string)$value);
 
@@ -25,10 +26,11 @@ final class Arguments
 
         foreach ($argv as $argument) {
             $parts = explode('=', $argument);
-
+            
             if (count($parts) !== 2) {
                 continue;
             }
+            
             $arguments[$parts[0]] = $parts[1];
         }
 
