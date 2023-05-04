@@ -18,6 +18,7 @@ class CreateUserCommandTest extends TestCase
     /**
      * Проверяем, что команда создания пользователя бросает исключение,
      * если пользователь с таким именем уже существует
+     * use stub
      */
     public function testItThrowsAnExceptionWhenUserAlreadyExists(): void 
     {
@@ -33,6 +34,7 @@ class CreateUserCommandTest extends TestCase
 
     /**
      * Проверяем, что команда действительно требует имя пользователя
+     * use stub
      */
     public function testItRequiresFirstName(): void 
     {
@@ -79,5 +81,46 @@ class CreateUserCommandTest extends TestCase
                 throw new UserNotFoundException("Not Found");
             }
         };
+    }
+
+    /**
+     * Тест, проверяющий, что команда сохраняет пользователя в репозитории
+     * use mock
+     */
+    public function testItSavesUserToRepository(): void 
+    {
+        $usersRepository = new class implements UsersRepositoryInterface {
+            private bool $called = false;
+
+            public function save(User $user): void 
+            {
+                $this->called = true;
+            }
+
+            public function get(UUID $uuid): User
+            {
+                throw new UserNotFoundException("Not Found");
+            }
+
+            public function getByLogin(string $login): User 
+            {
+                throw new UserNotFoundException("Not Found");
+            }
+
+            public function wasCalled(): bool
+            {
+                return $this->called;
+            }
+        };
+
+        $command = new CreateUserCommand($usersRepository);
+
+        $command->handle(new Arguments([
+            'login' => 'Ivan',
+            'first_name' => 'Ivan',
+            'last_name' => 'Ivan',
+        ]));
+
+        $this->assertTrue($usersRepository->wasCalled());
     }
 }
