@@ -42,7 +42,7 @@ try {
 
     $postRepository->save($newPost);
 
-    $post = $postRepository->get(new UUID("aff55332-44dc-4634-ad48-738763642860"));
+    $post = $postRepository->get($post_uuid);
 
     $newComment = new Comment(
         $comment_uuid,
@@ -53,7 +53,9 @@ try {
 
     $commentRepository->save($newComment);
 
-    $comment = $commentRepository->get(new UUID("98bd6437-1586-47b1-a5d6-fc9694a62776"));
+    $comment = $commentRepository->get($comment_uuid);
+
+    echo $post;
 
     echo $comment;
 
