@@ -41,22 +41,26 @@ class MysqlPostsRepositoryTest extends TestCase
 
     public function testItGetPostByUuid(): void 
     {
-        $connectionMock = $this->createStub(PDO::class);
+        $connectionStub = $this->createStub(PDO::class);
         
-        $statementStub = $this->createStub(PDOStatement::class);
-        
-        $statementStub->method('fetch')->willReturn(false);
+        $statementMock = $this->createMock(PDOStatement::class);
 
-        $connectionMock->method('prepare')->willReturn($statementStub);
+        $statementMock->method('fetch')->willReturn([
+            'uuid' => '0705d895-5c66-4fed-bde2-42aec9472f0c',
+            'author_uuid' => '1a6a4367-e69d-4382-8fdc-d253733f9f7f',
+            'title' => 'Test title',
+            'text' => 'Test text',
+            'login' => 'Ivan',
+            'first_name' => 'Ivan',
+            'last_name' => 'Ivan',
+        ]);
 
-        $repository = new MysqlPostsRepository($connectionMock);
+        $connectionStub->method('prepare')->willReturn($statementMock);
 
-        $this->expectException(PostNotFoundException::class);
-        $this->expectExceptionMessage("Невозможно найти статью: 0705d895-5c66-4fed-bde2-42aec9472f0c");
+        $postRepository = new MysqlPostsRepository($connectionStub);
+        $post = $postRepository->get(new UUID('0705d895-5c66-4fed-bde2-42aec9472f0c'));
 
-        $post = $repository->get(new UUID('0705d895-5c66-4fed-bde2-42aec9472f0c'));
-
-        $this->assertSame('0705d895-5c66-4fed-bde2-42aec9472f0c', $post->uuid());
+        $this->assertSame('0705d895-5c66-4fed-bde2-42aec9472f0c', (string)$post->uuid());
     }
 
     public function testItSavePostToDatabase(): void 
