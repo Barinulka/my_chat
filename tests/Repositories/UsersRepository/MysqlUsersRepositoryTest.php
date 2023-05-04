@@ -1,5 +1,6 @@
 <?php
 namespace App\Blog\PHPUnit\Repositories\UsersRepository;
+
 use PDO;
 use PDOStatement;
 use App\Blog\User;
