@@ -54,7 +54,7 @@ class User
     /**
      * @return string
      */
-    public function getLogin(): string
+    public function login(): string
     {
         return $this->login;
     }

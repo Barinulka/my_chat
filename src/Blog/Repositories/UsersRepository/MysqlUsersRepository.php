@@ -24,7 +24,7 @@ class MysqlUsersRepository implements UsersRepositoryInterface
             ':uuid' => (string)$user->uuid(),
             ':first_name' => $user->name()->first(),
             ':last_name'=> $user->name()->last(),
-            ':login' => $user->getLogin()
+            ':login' => $user->login()
         ]);
     }
 
