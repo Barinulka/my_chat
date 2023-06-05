@@ -42,7 +42,9 @@ class FindByLogin implements ActionInterface
         // Возвращаем успешный ответ
         return new SuccessfulResponse([
             'login' => $user->login(),
-            'name' => $user->name()->first() . ' ' . $user->name()->last(),
+            'first_name' => $user->name()->first(),
+            'last_name' => $user->name()->last(),
+            'full_name' => $user->name()->first() . ' ' . $user->name()->last(),
         ]);
     }
 }
