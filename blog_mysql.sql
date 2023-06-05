@@ -32,7 +32,7 @@ CREATE TABLE `comments` (
   `author_uuid` varchar(255) NOT NULL,
   `post_uuid` varchar(255) NOT NULL,
   `text` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `comments`
@@ -53,7 +53,7 @@ CREATE TABLE `posts` (
   `author_uuid` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `text` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `posts`
@@ -79,7 +79,7 @@ CREATE TABLE `users` (
   `login` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Дамп данных таблицы `users`
