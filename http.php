@@ -5,8 +5,10 @@ use App\Http\ErrorResponse;
 use App\Http\SuccessfulResponse;
 use App\Blog\Exceptions\AppException;
 use App\Blog\Exceptions\HttpException;
+use App\Http\Actions\Posts\CreatePost;
 use App\Http\Actions\Users\CreateUser;
 use App\Http\Actions\Users\FindByLogin;
+use App\Blog\Repositories\PostsRepository\MysqlPostsRepository;
 use App\Blog\Repositories\UsersRepository\MysqlUsersRepository;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -21,7 +23,8 @@ $routes = [
         '/users/show' => new FindByLogin(new MysqlUsersRepository($connection)),
     ], 
     'POST' => [
-        '/users/create' => new CreateUser(new MysqlUsersRepository($connection))
+        '/users/create' => new CreateUser(new MysqlUsersRepository($connection)),
+        '/posts/create' => new CreatePost(new MysqlPostsRepository($connection), new MysqlUsersRepository($connection))
     ]
 ];
 
