@@ -7,7 +7,9 @@ use App\Blog\Exceptions\AppException;
 use App\Blog\Exceptions\HttpException;
 use App\Http\Actions\Posts\CreatePost;
 use App\Http\Actions\Users\CreateUser;
-use App\Http\Actions\Users\FindByLogin;
+use App\Http\Actions\Posts\DeleteByUuid;
+use App\Http\Actions\Posts\FindByUuid as ShowPost;
+use App\Http\Actions\Users\FindByLogin as ShowUser;
 use App\Blog\Repositories\PostsRepository\MysqlPostsRepository;
 use App\Blog\Repositories\UsersRepository\MysqlUsersRepository;
 
@@ -17,15 +19,20 @@ require __DIR__ . '/DB/db_connect.php';
 // Содаем объект запроса из суперглобальных переменных
 $request = new Request($_GET, $_SERVER, file_get_contents('php://input'));
 
+// TODO: Create posts show action and comments all actions
 
 $routes = [
     'GET' => [
-        '/users/show' => new FindByLogin(new MysqlUsersRepository($connection)),
+        '/users/show' => new ShowUser(new MysqlUsersRepository($connection)),
+        '/posts/show' => new ShowPost(new MysqlPostsRepository($connection)),
     ], 
     'POST' => [
         '/users/create' => new CreateUser(new MysqlUsersRepository($connection)),
-        '/posts/create' => new CreatePost(new MysqlPostsRepository($connection), new MysqlUsersRepository($connection))
-    ]
+        '/posts/create' => new CreatePost(new MysqlPostsRepository($connection), new MysqlUsersRepository($connection)),
+    ],
+    'DELETE' => [
+        '/posts/delete' => new DeleteByUuid(new MysqlPostsRepository($connection))
+    ],
 ];
 
 // Пытаемся получить путь
@@ -36,6 +43,7 @@ try {
     (new ErrorResponse)->send();
     return;
 }
+
 
 try {
     // Пытаемся получить HTTP-метод запроса

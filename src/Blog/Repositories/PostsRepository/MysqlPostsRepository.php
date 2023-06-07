@@ -5,6 +5,7 @@ use PDO;
 use PDOStatement;
 use App\Blog\Post;
 use App\Blog\UUID;
+use App\Http\ErrorResponse;
 use App\Blog\Exceptions\PostNotFoundException;
 use App\Blog\Repositories\UsersRepository\MysqlUsersRepository;
 use App\Blog\Repositories\PostsRepository\PostRepositoryInterface;
@@ -43,6 +44,18 @@ class MysqlPostsRepository implements PostRepositoryInterface
         return $this->getPost($statement, $uuid);
     }
 
+    public function delete(UUID $uuid) 
+    {
+        $statement = $this->connection->prepare(
+            "DELETE FROM posts WHERE uuid = :uuid"
+        );
+
+        $statement->execute([
+            ':uuid' => (string)$uuid
+        ]);
+
+    }
+
     private function getPost(PDOStatement $statemant, string $string): Post 
     {
         $result = $statemant->fetch(PDO::FETCH_ASSOC);
@@ -63,4 +76,5 @@ class MysqlPostsRepository implements PostRepositoryInterface
             $result['text']
         );
     }
+
 }
